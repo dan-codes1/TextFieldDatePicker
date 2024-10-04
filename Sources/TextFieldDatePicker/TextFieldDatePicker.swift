@@ -16,13 +16,13 @@ import SwiftUI
 public struct TextFieldDatePicker: UIViewRepresentable {
     @Binding var date: Date?
     private var datePickerMode: UIDatePicker.Mode = .date
-    private var dateStyle: DateFormatter.Style = .medium
+    private var dateStyle: DateFormatter.Style
     private var minimumDate: Date? = nil
     private var maximumDate: Date? = nil
     private var placeHolder: String?
     private var selectionUpdateMode: TextFieldPickerSelectionUpdateMode
 
-    init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode, dateStyle: DateFormatter.Style, minimumDate: Date? = nil, maximumDate: Date? = nil) {
+    init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode = .date, dateStyle: DateFormatter.Style = .medium, minimumDate: Date? = nil, maximumDate: Date? = nil) {
         self.placeHolder = title
         self._date = date
         self.datePickerMode = datePickerMode
