@@ -13,13 +13,14 @@ import Foundation
 import SwiftUI
 
 @available(iOS 13.4, *)
-struct TextFieldDatePicker: UIViewRepresentable {
+public struct TextFieldDatePicker: UIViewRepresentable {
     @Binding var date: Date?
     private var datePickerMode: UIDatePicker.Mode = .date
     private var dateStyle: DateFormatter.Style = .medium
     private var minimumDate: Date? = nil
     private var maximumDate: Date? = nil
     private var placeHolder: String?
+    private var selectionUpdateMode: TextFieldPickerSelectionUpdateMode
 
     init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode, dateStyle: DateFormatter.Style, minimumDate: Date? = nil, maximumDate: Date? = nil) {
         self.placeHolder = title
@@ -28,9 +29,10 @@ struct TextFieldDatePicker: UIViewRepresentable {
         self.dateStyle = dateStyle
         self.minimumDate = minimumDate
         self.maximumDate = maximumDate
+        self.selectionUpdateMode = .onSelect
     }
 
-    func makeUIView(context: Context) -> TextFieldDatePickerUIView {
+    public func makeUIView(context: Context) -> TextFieldDatePickerUIView {
         let view = TextFieldDatePickerUIView()
         view.dateStyle = dateStyle
         view.datePickerMode = datePickerMode
@@ -41,23 +43,33 @@ struct TextFieldDatePicker: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: TextFieldDatePickerUIView, context: Context) { }
+    public func updateUIView(_ uiView: TextFieldDatePickerUIView, context: Context) { }
 
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
 }
 
 @available(iOS 13.4, *)
 extension TextFieldDatePicker {
-    class Coordinator: NSObject, TextFieldDatePickerDelegate {
+    /// Sets the selection update mode in this view.
+    public func selectionUpdateMode(_ mode: TextFieldPickerSelectionUpdateMode) -> TextFieldDatePicker {
+        var view = self
+        view.selectionUpdateMode = mode
+        return view
+    }
+}
+
+@available(iOS 13.4, *)
+extension TextFieldDatePicker {
+    public class Coordinator: NSObject, TextFieldDatePickerDelegate {
         let view: TextFieldDatePicker
 
         init(_ view: TextFieldDatePicker) {
             self.view = view
         }
 
-        func picker(_ picker: TextFieldDatePickerUIView, didSelectDate date: Date) {
+        public func picker(_ picker: TextFieldDatePickerUIView, didSelectDate date: Date) {
             view.date = date
         }
     }
