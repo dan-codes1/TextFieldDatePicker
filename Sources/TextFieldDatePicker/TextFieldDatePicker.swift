@@ -22,7 +22,7 @@ public struct TextFieldDatePicker: UIViewRepresentable {
     private var placeHolder: String?
     private var selectionUpdateMode: TextFieldPickerSelectionUpdateMode
 
-    init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode = .date, dateStyle: DateFormatter.Style = .medium, minimumDate: Date? = nil, maximumDate: Date? = nil) {
+    public init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode = .date, dateStyle: DateFormatter.Style = .medium, minimumDate: Date? = nil, maximumDate: Date? = nil) {
         self.placeHolder = title
         self._date = date
         self.datePickerMode = datePickerMode
