@@ -16,12 +16,22 @@ import SwiftUI
 @available(iOS 13.4, *)
 public struct TextFieldDatePicker: UIViewRepresentable {
     @Binding private var date: Date?
-    private var datePickerMode: UIDatePicker.Mode = .date
+    private var datePickerMode: UIDatePicker.Mode
     private var dateStyle: DateFormatter.Style
-    private var minimumDate: Date? = nil
-    private var maximumDate: Date? = nil
+    private var minimumDate: Date?
+    private var maximumDate: Date?
     private var placeHolder: String?
     private var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode
+
+    public init(_ title: String, date: Binding<Date?>) {
+        self.placeHolder = title
+        self._date = date
+        self.datePickerMode = .date
+        self.dateStyle = .medium
+        self.minimumDate = nil
+        self.maximumDate = nil
+        self.selectionUpdateMode = .onSelect
+    }
 
     public init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode = .date, dateStyle: DateFormatter.Style = .medium, minimumDate: Date? = nil, maximumDate: Date? = nil) {
         self.placeHolder = title
@@ -35,16 +45,18 @@ public struct TextFieldDatePicker: UIViewRepresentable {
 
     public func makeUIView(context: Context) -> TextFieldDatePickerUIView {
         let view = TextFieldDatePickerUIView()
-        view.dateStyle = dateStyle
         view.datePickerMode = datePickerMode
-        view.minimumDate = minimumDate
+        view.dateStyle = dateStyle
         view.maximumDate = maximumDate
+        view.minimumDate = minimumDate
         view.placeHolder = placeHolder
         view.delegate = context.coordinator
         return view
     }
-
-    public func updateUIView(_ uiView: TextFieldDatePickerUIView, context: Context) { }
+    
+    public func updateUIView(_ uiView: TextFieldDatePickerUIView, context: Context) {
+        uiView.placeHolder = placeHolder
+    }
 
     public func makeCoordinator() -> Coordinator {
         Coordinator(self)
