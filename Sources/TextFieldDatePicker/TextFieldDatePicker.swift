@@ -55,7 +55,7 @@ public struct TextFieldDatePicker: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: TextFieldDatePickerUIView, context: Context) {
-        uiView.placeHolder = placeHolder
+        uiView.selectionUpdateMode = selectionUpdateMode
     }
 
     public func makeCoordinator() -> Coordinator {
