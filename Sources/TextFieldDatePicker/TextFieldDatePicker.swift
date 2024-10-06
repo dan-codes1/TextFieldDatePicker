@@ -13,6 +13,26 @@
 import Foundation
 import SwiftUI
 
+/// UI component that provides a TextField with a date picker as its input view.
+/// - Parameters:
+///     - title: The placehodler of the text field.
+///     - date: The selected date.
+///     - datePickerMode: The mode of the date picker.
+///     - dateStyle: The style of the date to be shown in the text field.
+///     - minimumDate: The minimum date to show in the picker options.
+///     - maximumDate: The maximum date to show in the picker options.
+///
+/// **Example Usage**:
+/// ```swift
+/// struct ContentView: View {
+///     @State private var date: Date?
+///     let countries = Country.allCases
+///
+///     var body: some View {
+///         TextFieldDatePicker("Select date", date: $date)
+///     }
+/// }
+/// ```
 @available(iOS 13.4, *)
 public struct TextFieldDatePicker: UIViewRepresentable {
     @Binding private var date: Date?
