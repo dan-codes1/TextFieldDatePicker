@@ -37,7 +37,7 @@ public final class TextFieldDatePickerUIView: UIView {
 
     private lazy var picker: UIDatePicker = {
         let view = UIDatePicker()
-        view.translatesAutoresizingMaskIntoConstraints = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.datePickerMode = datePickerMode
         view.preferredDatePickerStyle = .wheels
         view.minimumDate = minimumDate
@@ -48,7 +48,7 @@ public final class TextFieldDatePickerUIView: UIView {
 
     private lazy var textField: UITextField = {
         let field = UITextField()
-        field.translatesAutoresizingMaskIntoConstraints = true
+        field.translatesAutoresizingMaskIntoConstraints = false
         field.delegate = self
         field.placeholder = placeHolder
         let toolbar = UIToolbar()
