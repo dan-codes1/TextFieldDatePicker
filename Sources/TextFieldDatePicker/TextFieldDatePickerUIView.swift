@@ -61,7 +61,7 @@ public final class TextFieldDatePickerUIView: UIView {
         return field
     }()
 
-    init() {
+    public init() {
         super.init(frame: .zero)
         self.configure()
         self.layout()
