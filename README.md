@@ -3,7 +3,7 @@
 
 A SwiftUI package that provides a TextField with a DatePicker as its input view. The date picker replaces the keyboard as the input view for the TextField.
 
-https://github.com/user-attachments/assets/ef0083cf-3051-4995-865b-0def831cf338
+https://github.com/user-attachments/assets/9947ae49-f634-4d09-a08f-06aa02713cc2
 
 ## Requirements
 
