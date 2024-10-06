@@ -34,6 +34,7 @@ public final class TextFieldDatePickerUIView: UIView {
         }
     }
     var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode = .onSelect
+    private var isIntialSelection: Bool = true
 
     private lazy var picker: UIDatePicker = {
         let view = UIDatePicker()
@@ -105,6 +106,15 @@ private extension TextFieldDatePickerUIView {
 
 @available(iOS 13.4, *)
 extension TextFieldDatePickerUIView: UITextFieldDelegate {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if isIntialSelection {
+            let formatter = DateFormatter()
+            formatter.dateStyle = dateStyle
+            textField.text = formatter.string(from: picker.date)
+            isIntialSelection = false
+        }
+    }
+
     public func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.picker(self, didSelectDate: picker.date)
         let formatter = DateFormatter()
