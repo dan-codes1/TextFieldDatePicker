@@ -33,7 +33,7 @@ public final class TextFieldDatePickerUIView: UIView {
             textField.placeholder = placeHolder
         }
     }
-    var selectionUpdateMode: TextFieldPickerSelectionUpdateMode = .onSelect
+    var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode = .onSelect
 
     private lazy var picker: UIDatePicker = {
         let view = UIDatePicker()

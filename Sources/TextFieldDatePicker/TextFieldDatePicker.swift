@@ -21,7 +21,7 @@ public struct TextFieldDatePicker: UIViewRepresentable {
     private var minimumDate: Date? = nil
     private var maximumDate: Date? = nil
     private var placeHolder: String?
-    private var selectionUpdateMode: TextFieldPickerSelectionUpdateMode
+    private var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode
 
     public init(_ title: String, date: Binding<Date?>, datePickerMode: UIDatePicker.Mode = .date, dateStyle: DateFormatter.Style = .medium, minimumDate: Date? = nil, maximumDate: Date? = nil) {
         self.placeHolder = title
@@ -54,7 +54,7 @@ public struct TextFieldDatePicker: UIViewRepresentable {
 @available(iOS 13.4, *)
 extension TextFieldDatePicker {
     /// Sets the selection update mode in this view.
-    public func selectionUpdateMode(_ mode: TextFieldPickerSelectionUpdateMode) -> TextFieldDatePicker {
+    public func selectionUpdateMode(_ mode: TextFieldDatePickerSelectionUpdateMode) -> TextFieldDatePicker {
         var view = self
         view.selectionUpdateMode = mode
         return view

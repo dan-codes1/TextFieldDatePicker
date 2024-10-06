@@ -9,7 +9,7 @@
 import Foundation
 
 /// Determines how often the delegate gets updates of changes to picker selection.
-public enum TextFieldPickerSelectionUpdateMode {
+public enum TextFieldDatePickerSelectionUpdateMode {
     /// Updates the selected value only at the end of the date selection.
     case onFinish
     /// Updates the selected value on every new date component selection on the picker slider.
