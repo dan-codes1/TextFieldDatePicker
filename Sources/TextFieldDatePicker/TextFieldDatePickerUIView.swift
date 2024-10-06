@@ -33,11 +33,12 @@ public final class TextFieldDatePickerUIView: UIView {
             textField.placeholder = placeHolder
         }
     }
-    var selectionUpdateMode: TextFieldPickerSelectionUpdateMode = .onSelect
+    var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode = .onSelect
+    private var isIntialSelection: Bool = true
 
     private lazy var picker: UIDatePicker = {
         let view = UIDatePicker()
-        view.translatesAutoresizingMaskIntoConstraints = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.datePickerMode = datePickerMode
         view.preferredDatePickerStyle = .wheels
         view.minimumDate = minimumDate
@@ -48,7 +49,7 @@ public final class TextFieldDatePickerUIView: UIView {
 
     private lazy var textField: UITextField = {
         let field = UITextField()
-        field.translatesAutoresizingMaskIntoConstraints = true
+        field.translatesAutoresizingMaskIntoConstraints = false
         field.delegate = self
         field.placeholder = placeHolder
         let toolbar = UIToolbar()
@@ -61,7 +62,7 @@ public final class TextFieldDatePickerUIView: UIView {
         return field
     }()
 
-    init() {
+    public init() {
         super.init(frame: .zero)
         self.configure()
         self.layout()
@@ -105,6 +106,15 @@ private extension TextFieldDatePickerUIView {
 
 @available(iOS 13.4, *)
 extension TextFieldDatePickerUIView: UITextFieldDelegate {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        if isIntialSelection {
+            let formatter = DateFormatter()
+            formatter.dateStyle = dateStyle
+            textField.text = formatter.string(from: picker.date)
+            isIntialSelection = false
+        }
+    }
+
     public func textFieldDidEndEditing(_ textField: UITextField) {
         delegate?.picker(self, didSelectDate: picker.date)
         let formatter = DateFormatter()
