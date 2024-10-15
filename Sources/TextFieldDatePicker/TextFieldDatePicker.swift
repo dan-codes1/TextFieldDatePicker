@@ -70,6 +70,7 @@ public struct TextFieldDatePicker: UIViewRepresentable {
         view.maximumDate = maximumDate
         view.minimumDate = minimumDate
         view.placeHolder = placeHolder
+        view.initialDate = date
         view.delegate = context.coordinator
         return view
     }

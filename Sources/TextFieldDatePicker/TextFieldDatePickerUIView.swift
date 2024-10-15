@@ -11,29 +11,38 @@ import UIKit
 
 @available(iOS 13.4, *)
 public final class TextFieldDatePickerUIView: UIView {
-    var datePickerMode: UIDatePicker.Mode = .date {
+    public var datePickerMode: UIDatePicker.Mode = .date {
         didSet {
             picker.datePickerMode = datePickerMode
         }
     }
-    var dateStyle: DateFormatter.Style = .medium
-    var delegate: TextFieldDatePickerDelegate?
-    var minimumDate: Date? = nil {
+    public var dateStyle: DateFormatter.Style = .medium
+    public var delegate: TextFieldDatePickerDelegate?
+    public var initialDate: Date? {
+        didSet {
+            if let initialDate {
+                let formatter = DateFormatter()
+                formatter.dateStyle = dateStyle
+                textField.text = formatter.string(from: initialDate)
+            }
+        }
+    }
+    public var minimumDate: Date? = nil {
         didSet {
             picker.minimumDate = minimumDate
         }
     }
-    var maximumDate: Date? = nil {
+    public var maximumDate: Date? = nil {
         didSet {
             picker.maximumDate = maximumDate
         }
     }
-    var placeHolder: String? {
+    public var placeHolder: String? {
         didSet {
             textField.placeholder = placeHolder
         }
     }
-    var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode = .onSelect
+    public var selectionUpdateMode: TextFieldDatePickerSelectionUpdateMode = .onSelect
     private var isIntialSelection: Bool = true
 
     private lazy var picker: UIDatePicker = {
